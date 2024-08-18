@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gueule Tapée-Fass-Colobane - Informations Historiques</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        #map-container {
+            width: 60%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #content {
+            width: 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        #info, #gallery, #comments {
+            margin-bottom: 20px;
+        }
+        .gallery-row {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .gallery-image {
+            width: auto;
+            height: 150px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <div id="content">
+        <div id="info">
+            <h2>Informations Historiques</h2>           
+            <p>La commune de Gueule-Tapée-Fass-Colobane est située dans le Sud-Ouest de Dakar. Elle a été créée en 1996 avec Léna Diagne Fall comme premier maire. La commune est riche en histoire et activités culturelles, avec une évolution significative sur les plans démographique, culturel et politique. Les traditions léboues sont encore présentes et célébrées annuellement.</p>
+            <h3>Monuments et places historiques</h3>
+            <ul>
+                <li>Village Artisanal de Soumbédione</li>
+                <li>Marché aux poissons de Soumbédioune</li>
+                <li>École El Hadj Alie Codou Ndoye ex école de paille</li>
+                <li>Centre Elisabeth DIOUF</li>
+                <li>Marché Gueule Tapée</li>
+                <li>Pharmacie Mboti Pom</li>
+                <li>Centre Hospitalier Abass Ndao</li>
+                <li>Canal IV</li>
+                <li>Marché Colobane</li>
+                <li>Mosquée Hock</li>
+                <li>Église Des assemblées de Dieu du Sénégal</li>
+                <li>Place de la nation</li>
+            </ul>
+            <h3>Les Événements Historiques</h3>
+            <ul>
+                <li><h4>Incendie à Fass-Bâtiment</h4>
+                    <p>Un incendie majeur a ravagé une baraque dans les années 80, soulignant les difficultés des services de secours face aux conditions d'habitation.</p>
+                </li>
+            </ul>
+            <h3>Figures historiques</h3>
+            <ul>
+                <li><h4>El Hadji Ousmane Diop Coumba Pathé</h4>
+                    <p>Connu pour sa générosité et ses pouvoirs mystiques.</p>
+                </li>
+                <li><h4>Sakoura Badiane</h4>
+                    <p>Premier habitant de Colobane, éleveur et commerçant.</p>
+                </li>
+                <li><h4>Mame Gorgui Ndiaye</h4>
+                    <p>Ancien lutteur célèbre.</p>
+                </li>
+                <li><h4>Moustapha Gueye</h4>
+                    <p>Surnommé le Tigre de Fass, un champion de lutte.</p>
+                </li>
+                <li><h4>Mbaye Gueye</h4>
+                    <p>Premier à porter le titre de Tigre de Fass, une figure historique de la lutte sénégalaise.</p>
+                </li>
+            </ul>
+        </div>
+        <div id="gallery">
+            <h3>Galerie</h3>
+            <div class="gallery-row">
+                <a href="imageGT1.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="imageGT1.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <a href="imageGT2.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="imageGT2.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <a href="imageGT3.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="imageGT3.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+				<a href="imageGT4.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="imageGT4.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <!-- Ajoutez d'autres images de la galerie ici -->
+            </div>
+        </div>
+        <div id="comments">
+            <h3>Commentaires</h3>
+            <textarea rows="5" placeholder="Laissez un commentaire..."></textarea>
+            <button>Soumettre</button>
+            <!-- Liste des commentaires -->
+            <div>
+                <p><strong>Assane Ndiaye:</strong> Très bel endroit!</p>
+                <p><strong>Momadou Diop:</strong> J'adore l'histoire de cette commune.</p>
+                <!-- Ajoutez d'autres commentaires ici -->
+            </div>
+            <a href="index.html">Retour à la carte</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        var googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
+        // Initialisation de la carte
+        var map = L.map('map').setView([14.687983, -17.454759], 15); // Coordonnées centrales de Gueule Tapée-Fass-Colobane
+
+        // Couches de base
+        var googleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=' + googleMapsApiKey, {
+            attribution: 'Map data ©2021 Google',
+            maxZoom: 20
+        });
+
+        var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        });
+
+        // Ajout de la couche OpenStreetMap par défaut
+        openStreetMap.addTo(map);
+
+        // Liste des lieux
+        var locations = [
+            {
+                "name": "Village artisanal de Soumbédione",
+                "lat": 14.6771120,
+                "lon": -17.4577086,
+                "description": "Créé en 1961, il est placé sous le contrôle de la chambre des métiers et sous la tutelle de la direction de l’artisanat",
+                "image": "imageGT2.jpg"
+            },
+            {
+                "name": "Marché aux poissons de Soumbédioune",
+                "lat": 14.6783270,
+                "lon": -17.4589662,
+                "description": "C’est un lieu mythique situé en face l’atlantique",
+                "image": "imageGT5.jpg"
+            },
+            {
+                "name": "École El Hadj Alie Codou Ndoye ex école de paille",
+                "lat": 14.6808687,
+                "lon": -17.4566022,
+                "description": "C’est un établissement bâti sur une ancienne arène en hommage à Modou GUEYE qui y vendait de la paille",
+                "image": "ecole_el_hadj_ali_codou.jpg"
+            },
+            {
+                "name": "Centre Elisabeth DIOUF",
+                "lat": 14.6818648,
+                "lon": -17.4583453,
+                "description": "C’est une unité médicale polyvalente",
+                "image": "imageGT6.jpg"
+            },
+            {
+                "name": "Marché Gueule Tapée",
+                "lat": 14.6796230,
+                "lon": -17.4569213,
+                "description": "Plus connu sous le nom de « Marché Ndokett », il était un lieu de convergence des vendeurs ou des Férues de « Ndokett ». Il a aujourd’hui un « Louma » (marché Hebdomadaire qui refuse du monde tous les mercredis",
+                "image": "imageGT7.jpg"
+            },
+            {
+                "name": "Pharmacie Mboti Pom",
+                "lat": 14.6816585,
+                "lon": -17.4548349,
+                "description": "C’est une Pharmacie qui porte le nom de Mboti pom qui faisait partie des douze pencs",
+                "image": "pharmacie_mboti_pom.jpg"
+            },
+            {
+                "name": "Centre Hospitalier Abass Ndao",
+                "lat": 14.6847321,
+                "lon": -17.4540688,
+                "description": "Il a été créé en 1935 pour servir de maison de repos pour les prisonniers âgés",
+                "image": "imageGT8.jpg"
+            },
+            {
+                "name": "Canal IV",
+                "lat": 14.6920027,
+                "lon": -17.4565767,
+                "description": "Le canal IV est construit pour évacuer les eaux usées",
+                "image": "imageGT9.jpg"
+            },
+            {
+                "name": "Quartier Samba Diery Diallo",
+                "lat": 14.6915409,
+                "lon": -17.4457724,
+                "description": "Le Quartier Samba Diery Diallo a été construit en 1952 et s’appelait Caserne de La Médina",
+                "image": "quartier_samba_diery_diallo.jpg"
+            },
+            {
+                "name": "Marché Colobane",
+                "lat": 14.6956710,
+                "lon": -17.4438814,
+                "description": "le marché de colobane est le premier marché de friperie à Dakar",
+                "image": "marche_colobane.jpg"
+            },
+            {
+                "name": "Mosquée Hock",
+                "lat": 14.6944007,
+                "lon": -17.4450445,
+                "description": "La mosquée Hock est historique et porte le nom des premiers habitants qui venaient des déguerpissements de Hock",
+                "image": "mosquee_hock.jpg"
+            },
+            {
+                "name": "Église Des assemblées de Dieu du Sénégal",
+                "lat": 14.6928952,
+                "lon": -17.4466642,
+                "description": "C’est une église évangélique et pentecôtiste",
+                "image": "imageGT4.jpg"
+            },
+            {
+                "name": "Place de la nation",
+                "lat": 14.6937881,
+                "lon": -17.4478015,
+                "description": "Elle a été construite durant le mandat du premier Président du Sénégal, Léopold Sédar Senghor. Chaque année y est célébrée la fête d’indépendance",
+                "image": "imageGT3.jpg"
+            }
+        ];
+
+        // Ajout des marqueurs à la carte
+        var markersLayer = new L.LayerGroup(); // Layer to contain search results
+        map.addLayer(markersLayer);
+
+        locations.forEach(function(location) {
+            var marker = L.marker([location.lat, location.lon])
+                .bindPopup('<b>' + location.name + '</b><br>' + location.description + '<br><img src="' + location.image + '" alt="' + location.name + '" style="width:100%;">');
+            markersLayer.addLayer(marker);
+        });
+
+        // Ajout de la barre de recherche
+        var controlSearch = new L.Control.Search({
+            layer: markersLayer,
+            initial: false,
+            zoom: 17,
+            marker: false
+        });
+
+        map.addControl(controlSearch);
+
+        controlSearch.on('search:locationfound', function(e) {
+            e.layer.openPopup();
+        });
+
+        // Ajout du contrôle de calques pour basculer entre les cartes
+        var baseMaps = {
+            "Google Satellite Hybrid": googleSatelliteHybrid,
+            "OpenStreetMap": openStreetMap
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+    </script>
+</body>
+</html>

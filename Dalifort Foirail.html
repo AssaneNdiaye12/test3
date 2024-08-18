@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalifort - Informations Historiques</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        #map-container {
+            width: 60%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #content {
+            width: 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        #info, #gallery, #comments {
+            margin-bottom: 20px;
+        }
+        .gallery-row {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .gallery-image {
+            width: auto;
+            height: 150px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <div id="content">
+        <div id="info">
+            <h2>Informations Historiques</h2>           
+            <p>La création de Dalifort est venue d’un ressortissant malien dénommé Demba Diop encore appelé Demba Traoré. Ce dernier arriva au Sénégal en 1927, il fit connaissance à un italien dénommé Ernest Christian, un fleuriste et exportateur de matériaux en Europe en 1937. C’est par l’intermédiaire de cet italien qu’il aménagea un jardin horticole en 1941 à Dalifort et s’y fixa de manière pérenne en 1943. Dalifort ou (Dalifort Foirail) est l’une des 16 communes d’arrondissement de la ville de Pikine. Elle est devenue commune le 30 avril 1996 par décret n°96745 elle fait partie de l’arrondissement de Dagoudane. Elle compte 37.184 habitants (en 2020) répartis sur 253,67 ha leurs principales activités productives sont l’artisanat, le commerce, l’élevage .La commune est découpé actuellement en 20 cités que sont: shell, assurance, soleil, générale foncière, hilal, eaux et foret, marine, gendarmerie, mairie, bel veder, poste, 308, saa massa, touba seras, deggo, darou salam, mor maty sarr, zone industrielle, serass, dalifort.</p>
+            <h3>Monuments et places historiques</h3>
+            <ul>
+                <li>PALAASU MBAAM YA</li>
+                <li>BATIMENT HISTORIQUE</li>
+                <li>MARCHE CENTRAL AU POISSON/li>
+                <li>SOGAS EX SERAS</li>
+                
+            <h3>Les Événements Historiques</h3>
+            <ul>
+                <li><h4>Mbapate</h4>
+                    <p>Ils organisaient des combats de lutte ‟Mbapate” (lutte sans frappe) chaquebsamedi, ce dernier était leurs activités culturelles dominantes elle faisait l’animation du village. Cet évènement fut arrêté en 1983 dû à des problèmes opposants les sérères et les peulhs</p>
+                </li>
+            </ul>
+            <h3>Figures historiques</h3>
+            <ul>
+                <li><h4>Demba Diop</h4>
+                    <p>Encore appelé Demba Traoré était un « bambara » d’origine malien. Il est le fondateur de Dalifort en 1942 grâce à l’aide d’un jardinier nommé Ernest Christian un fleuriste et exportateur ferreux à cette époque on l’appelait « Gourel Demba » (village de Demba Diop).</p>
+                </li>
+                <li><h4>Cheikh Tidiane Agne 1</h4>
+                    <p>Cheikh Tidiane Agne 1 était un vendeur ambulant de pain. Il fut le premier habitant de dalifort après Demba Diop et était le premier imam de Dalifort. Apres son décès, il est succédé par son fils Demba Agne.</p>
+                </li>
+                <li><h4>Cheikh Tidiane Agne 2</h4>
+                    <p>Il est né le 10 décembre 1961 à Yoff et établi à Dalifort depuis 1968, Cheikh Tidiane Agne est Technicien supérieur en assainissement public. Il est aujourd'hui en service à l'Agence Nationale de la Couverture Maladie Universelle (ANACMU).</p>
+                </li>
+                <li><h4>Mame Kor Fall</h4>
+                    <p>Mame Kor Fall Est arrivé à dalifort en 1979, il fut le représentant des jeunes de dalifort vers les années 86, il fut le premier président des parents d’élevés. Il est actuellement le président des délégués de quartier de dalifort mais aussi le vice-président des délégués de quartier du département de Pikine.</p>
+                </li>
+                
+            </ul>
+        </div>
+        <div id="gallery">
+            <h3>Galerie</h3>
+            <div class="gallery-row">
+                <a href="imageDF1.jpg" data-lightbox="gallery" data-title="Dalifort">
+                    <img src="imageDF1.jpg" alt="Dalifort" class="gallery-image">
+                </a>
+                <a href="imageDF2.jpg" data-lightbox="gallery" data-title="Dalifort">
+                    <img src="imageDF2.jpg" alt="Dalifort" class="gallery-image">
+                </a>
+                <a href="imageDF3.jpg" data-lightbox="gallery" data-title="Dalifort">
+                    <img src="imageDF3.jpg" alt="Dalifort" class="gallery-image">
+                </a>
+				<a href="imageDF4.jpg" data-lightbox="gallery" data-title="Dalifort">
+                    <img src="imageDF4.jpg" alt="Dalifort" class="gallery-image">
+                </a>
+                <!-- Ajoutez d'autres images de la galerie ici -->
+            </div>
+        </div>
+        <div id="comments">
+            <h3>Commentaires</h3>
+            <textarea rows="5" placeholder="Laissez un commentaire..."></textarea>
+            <button>Soumettre</button>
+            <!-- Liste des commentaires -->
+            <div>
+                <p><strong>Assane Ndiaye:</strong> Très bel endroit!</p>
+                <p><strong>Momadou Diop:</strong> J'adore l'histoire de cette commune.</p>
+                <!-- Ajoutez d'autres commentaires ici -->
+            </div>
+            <a href="index.html">Retour à la carte</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        var googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
+        // Initialisation de la carte
+        var map = L.map('map').setView([ 14.739855,-17.410729], 16); // Coordonnées centrales de Dalifort
+
+        // Couches de base
+        var googleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=' + googleMapsApiKey, {
+            attribution: 'Map data ©2021 Google',
+            maxZoom: 20
+        });
+
+        var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        });
+
+        // Ajout de la couche OpenStreetMap par défaut
+        openStreetMap.addTo(map);
+
+        // Liste des lieux
+        var locations = [
+            {
+                "name": "MARCHE CENTRAL AUX POISSONS",
+                "lat": 14.741171,
+                "lon": -17.404953,
+                "description": "Elle est inauguré en 1992 le premier directeur fut Saliou Diop de 1992 à 2001, suivi de Cheikh Samba séne de 2001 à 2011, Capitaine Bamba Diop de 2011 à mai 2015, Ndiaga Thiam de juin 2015 à novembre 2017, Mouhamed Abdoulaye Mbaye de novembre 2017 à octobre 2021, Kadialy Gassama de octobre 2021 à novembre 2022. Actuellement au marché reste 5000 hectares. Leurs projets sont la construction d’une infirmerie et un bâtiment pour les femmes Diolas d’une durée de 2ans.",
+                "image": "imageDF1.jpg"
+            },
+            {
+                "name": "SOGAS EXBSERAS",
+                "lat": 14.742849,
+                "lon": -17.408993,
+                "description": "SOGAS (Société de Gestion des Abattoirs du Sénégal) ex SERAS a été créée en 1956 par les colons. Elle est divisé en trois partie SERAS, SERAS Abattoir, Abattoir Mouton SERAS. ). Près de 200 bovins et 1200 ruminants y sont abattus chaque jour. Le SOGAS grouille de monde et baigne dans une atmosphère empuantie de par la forte odeur des abats et autres excréments d’animaux.",
+                "image": "imageDF2.jpg"
+            },
+            {
+                "name": "MAIRIE DE DALIFORT FORAIL",
+                "lat": 14.740888,
+                "lon": -17.418193,
+                "description": "Créée en 1996 par décret. Dalifort a connu quatre maires, le premier maire était Pape Ndiaye, le troisième maire Idrissa Diallo suivie de l’actuel maire Mamadou Mbengue (appelé Baye Diop)",
+                "image": "imageDF3.jpg"
+            }
+        ];
+
+        // Ajout des marqueurs à la carte
+        var markersLayer = new L.LayerGroup(); // Layer to contain search results
+        map.addLayer(markersLayer);
+
+        locations.forEach(function(location) {
+            var marker = L.marker([location.lat, location.lon])
+                .bindPopup('<b>' + location.name + '</b><br>' + location.description + '<br><img src="' + location.image + '" alt="' + location.name + '" style="width:100%;">');
+            markersLayer.addLayer(marker);
+        });
+
+        // Ajout de la barre de recherche
+        var controlSearch = new L.Control.Search({
+            layer: markersLayer,
+            initial: false,
+            zoom: 17,
+            marker: false
+        });
+
+        map.addControl(controlSearch);
+
+        controlSearch.on('search:locationfound', function(e) {
+            e.layer.openPopup();
+        });
+
+        // Ajout du contrôle de calques pour basculer entre les cartes
+        var baseMaps = {
+            "Google Satellite Hybrid": googleSatelliteHybrid,
+            "OpenStreetMap": openStreetMap
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+    </script>
+</body>
+</html>

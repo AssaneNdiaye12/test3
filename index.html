@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmapping des Communes de Dakar</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 75%;
+            float: left;
+        }
+        #sidebar {
+            height: 100vh;
+            width: 25%;
+            float: left;
+            padding: 10px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        #info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="sidebar">
+        <h2></h2>
+        <div id="info">
+            <h3>Histoire de la région de Dakar</h3>
+            <p>Avant l'arrivée des Européens, la région de Dakar était habitée par les Lébous, un groupe ethnique sénégalais. Les Lébous vivaient principalement de la pêche et de l'agriculture, et avaient une organisation sociale bien structurée.</p>
+            <p>Après l'indépendance, Dakar connut une croissance rapide et devint une métropole régionale. Les premières années de l'indépendance furent marquées par des efforts pour développer l'infrastructure et les institutions de la ville.</p>
+			<p>Dakar fut le siège de plusieurs événements politiques importants, notamment la tenue de sommets et de conférences africaines et internationales.</p>
+			<p>Dakar, de ses origines précoloniales à sa position actuelle comme capitale moderne et centre culturel et économique, a connu une transformation remarquable. La ville continue d'évoluer et de s'adapter aux défis du 21ème siècle tout en préservant son riche patrimoine historique et culturel.</p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.js"></script>
+    <script>
+        var googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
+        var map = L.map('map').setView([14.740443, -17.377343], 12);
+
+        var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var googleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=' + googleMapsApiKey, {
+            attribution: 'Map data ©2021 Google',
+            maxZoom: 20
+        });
+
+        var manIcon = L.icon({
+            iconUrl: 'L.icon.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
+        var userLocationMarker, userLocationCircle;
+
+        map.locate({setView: true, maxZoom: 16});
+
+        function onLocationFound(e) {
+            var radius = e.accuracy / 2;
+
+            if (userLocationMarker) {
+                map.removeLayer(userLocationMarker);
+                map.removeLayer(userLocationCircle);
+            }
+
+            userLocationMarker = L.marker(e.latlng, {icon: manIcon}).addTo(map)
+                .bindPopup("Vous êtes à " + radius + " mètres de ce point").openPopup();
+
+            userLocationCircle = L.circle(e.latlng, radius).addTo(map);
+        }
+
+        function onLocationError(e) {
+            alert("Erreur de localisation: " + e.message);
+        }
+
+        map.on('locationfound', onLocationFound);
+        map.on('locationerror', onLocationError);
+
+        function getCategoryColor(category) {
+            switch (category) {
+                case 'Urban': return '#1f77b4';
+                case 'Suburban': return '#2ca02c';
+                case 'Rural': return '#ff7f0e';
+                default: return '#d62728';
+            }
+        }
+
+        function style(feature) {
+            return {
+                fillColor: getCategoryColor(feature.properties.category),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.7
+            };
+        }
+		function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: function(e) {
+            var layer = e.target;
+            layer.setStyle({
+                weight: 5,
+                color: '#666',
+                dashArray: '',
+                fillOpacity: 0.7
+            });
+            displayInfo(feature.properties); // Met à jour le panneau latéral
+        },
+        mouseout: function(e) {
+            urbanLayer.resetStyle(e.target);
+        },
+        click: function(e) {
+            map.fitBounds(e.target.getBounds());
+            layer.bindPopup(`
+                <h3>${feature.properties.name}</h3>
+                <p>${feature.properties.description}</p>
+                <p><b>Population:</b> ${feature.properties.population}</p>
+                <p><b>Superficie:</b> ${feature.properties.area} km²</p>
+                <img src="${feature.properties.image}" alt="${feature.properties.name}" style="width:100%;">
+                <a href="${feature.properties.link}" target="_blank">En savoir plus</a>
+            `).openPopup();
+        }
+    });
+}
+
+
+        var communes = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Cambéréne",
+                        "category": "Urban",
+                        "population": 15000,
+                        "area": 5,
+                        "description": "Description de Cambéréne."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.429554, 14.762688]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Dakar Plateau",
+                        "category": "Urban",
+                        "population": 20000,
+                        "area": 3,
+                        "description": "Description de Dakar Plateau."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.432651, 14.670354]
+                    }
+                },
+				{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Dalifort Foirail",
+                        "category": "Urban",
+                        "population": 14000,
+                        "area": 6,
+                        "description": "Description de Dalifort Foirail."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.404953, 14.741171]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Dieuppeul Derklé",
+                        "category": "Urban",
+                        "population": 12000,
+                        "area": 4,
+                        "description": "Description de Dieuppeul Derklé."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.453118, 14.726416]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Djidah Thiaroye Kao",
+                        "category": "Suburban",
+                        "population": 25000,
+                        "area": 7,
+                        "description": "Description de Djidah Thiaroye Kao."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.378273, 14.763558]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Fass Point E Amitié",
+                        "category": "Urban",
+                        "population": 18000,
+                        "area": 6,
+                        "description": "Description de Fass Point E Amitié."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.466537, 14.676878]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Golf Sud",
+                        "category": "Suburban",
+                        "population": 22000,
+                        "area": 8,
+                        "description": "Description de Golf Sud."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.412936, 14.766422]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Grand Dakar",
+                        "category": "Urban",
+                        "population": 14000,
+                        "area": 4,
+                        "description": "Description de Grand Dakar."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.455804, 14.703163]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Grand Yoff",
+                        "category": "Urban",
+                        "population": 30000,
+                        "area": 10,
+                        "description": "Description de Grand Yoff."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.448056, 14.738770]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Gueule Tapée Fass Colobane",
+                        "category": "Urban",
+                        "population": 16000,
+                        "area": 5,
+                        "description": "Description de Gueule Tapée Fass Colobane."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.458950, 14.680908]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Hann Belair",
+                        "category": "Urban",
+                        "population": 19000,
+                        "area": 7,
+                        "description": "Description de Hann Belair."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.436943, 14.697834]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "HLM",
+                        "category": "Urban",
+                        "population": 13000,
+                        "area": 4,
+                        "description": "Description de HLM."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.442060, 14.708862]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Medina",
+                        "category": "Urban",
+                        "population": 20000,
+                        "area": 3,
+                        "description": "Description de Medina."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.448058, 14.679093]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Mermoz Sacré Cœur",
+                        "category": "Urban",
+                        "population": 17000,
+                        "area": 6,
+                        "description": "Description de Mermoz Sacré Cœur."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.474614, 14.703417]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Parcelles Assainies",
+                        "category": "Urban",
+                        "population": 24000,
+                        "area": 9,
+                        "description": "Description de Parcelles Assainies."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.441944, 14.757290]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Pikine Est",
+                        "category": "Suburban",
+                        "population": 21000,
+                        "area": 8,
+                        "description": "Description de Pikine Est."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.387543, 14.759369]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Rufisque Nord",
+                        "category": "Rural",
+                        "population": 11000,
+                        "area": 6,
+                        "description": "Description de Rufisque Nord."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.270000, 14.726667]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Rufisque Ouest",
+                        "category": "Rural",
+                        "population": 9000,
+                        "area": 5,
+                        "description": "Description de Rufisque Ouest."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.299680, 14.733260]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Sam Notaire Guédiawaye",
+                        "category": "Suburban",
+                        "population": 27000,
+                        "area": 10,
+                        "description": "Description de Sam Notaire Guédiawaye."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.399711, 14.777957]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Yoff",
+                        "category": "Suburban",
+                        "population": 23000,
+                        "area": 7,
+                        "description": "Description de Yoff."
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [-17.490343, 14.749541]
+                    }
+                }
+            ]
+        };
+
+        // Création de couches pour chaque catégorie
+        var urbanLayer = L.geoJSON(communes, {
+            filter: function (feature, layer) {
+                return feature.properties.category === "Urban";
+            },
+            style: style,
+            onEachFeature: function (feature, layer) {
+                if (feature.properties && feature.properties.name) {
+                    layer.bindPopup(feature.properties.name);
+                    layer.bindTooltip(feature.properties.name, {
+                        permanent: false, // Tooltip s'affiche au survol
+                        direction: "right",
+                        className: "label-tooltip"
+                    });
+                    layer.on({
+                        click: function() {
+                            window.location.href = feature.properties.name + '.html';
+                        }
+                    });
+                }
+            }
+        });
+
+        var suburbanLayer = L.geoJSON(communes, {
+            filter: function (feature, layer) {
+                return feature.properties.category === "Suburban";
+            },
+            style: style,
+            onEachFeature: function (feature, layer) {
+                if (feature.properties && feature.properties.name) {
+                    layer.bindPopup(feature.properties.name);
+                    layer.bindTooltip(feature.properties.name, {
+                        permanent: false,
+                        direction: "right",
+                        className: "label-tooltip"
+                    });
+                    layer.on({
+                        click: function() {
+                            window.location.href = feature.properties.name + '.html';
+                        }
+                    });
+                }
+            }
+        });
+
+        var ruralLayer = L.geoJSON(communes, {
+            filter: function (feature, layer) {
+                return feature.properties.category === "Rural";
+            },
+            style: style,
+            onEachFeature: function (feature, layer) {
+                if (feature.properties && feature.properties.name) {
+                    layer.bindPopup(feature.properties.name);
+                    layer.bindTooltip(feature.properties.name, {
+                        permanent: false,
+                        direction: "right",
+                        className: "label-tooltip"
+                    });
+                    layer.on({
+                        click: function() {
+                            window.location.href = feature.properties.name + '.html';
+                        }
+                    });
+                }
+            }
+        });
+
+        urbanLayer.addTo(map);
+        suburbanLayer.addTo(map);
+
+        function displayInfo(properties) {
+            document.getElementById('info').innerHTML = `
+                <h3>${properties.name}</h3>
+                <p><b>Catégorie:</b> ${properties.category}</p>
+                <p><b>Population:</b> ${properties.population}</p>
+                <p><b>Superficie:</b> ${properties.area} km²</p>
+                <p><b>Description:</b> ${properties.description}</p>
+            `;
+        }
+
+        var searchControl = new L.Control.Search({
+            layer: L.layerGroup([urbanLayer, suburbanLayer, ruralLayer]),
+            propertyName: 'name',
+            marker: false,
+            moveToLocation: function(latlng, title, map) {
+                map.setView(latlng, 14);
+            }
+        });
+
+        searchControl.on('search:locationfound', function(e) {
+            e.layer.setStyle({fillColor: '#3f0', color: '#0f0'});
+            if(e.layer._popup)
+                e.layer.openPopup();
+        }).on('search:collapsed', function(e) {
+            urbanLayer.eachLayer(function(layer) {
+                urbanLayer.resetStyle(layer);
+            });
+            suburbanLayer.eachLayer(function(layer) {
+                suburbanLayer.resetStyle(layer);
+            });
+            ruralLayer.eachLayer(function(layer) {
+                ruralLayer.resetStyle(layer);
+            });
+        });
+
+        map.addControl(searchControl);
+
+        var baseLayers = {
+            "OpenStreetMap": osmLayer,
+            "Google Satellite Hybrid": googleSatelliteHybrid
+        };
+
+        var overlayLayers = {
+            "Urban": urbanLayer,
+            "Suburban": suburbanLayer,
+            "Rural": ruralLayer
+        };
+
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+    </script>
+</body>
+</html>

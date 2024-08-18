@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambéréne - Informations Historiques</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        #map-container {
+            width: 60%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #content {
+            width: 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        #info, #gallery, #comments {
+            margin-bottom: 20px;
+        }
+        .gallery-row {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .gallery-image {
+            width: auto;
+            height: 150px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <div id="content">
+        <div id="info">
+            <h2>Informations Historiques</h2>           
+            <p>Situé au coeur du Sénégal, Cambérène se dresse comme un joyau chargé d'histoire et de spiritualité au sein de la confrérie layène. Fondé par le vénéré Mahdi Seydina Limamou, ce village tire son nom évocateur, "Kem-médina", de la lointaine Médine, symbolisant une connexion spirituelle profonde. L'histoire de Cambérène remonte à une époque où Seydina Limamou, persécuté par les siens, entreprit un exil empreint de détermination. Ce lieu, marqué par les épreuves de son fondateur, est devenu depuis un sanctuaire sacré pour la confrérie layène, attirant des milliers de fidèles en quête de spiritualité et de préservation d'une tradition riche. Cette introduction explorera les aspects fondamentaux de l'historique de Cambérène, révélant les racines de son fondateur, les moments-clés de son développement et son rôle actuel en tant que gardien d'une tradition spirituelle vibrante.</p>
+            <h3>Monuments et places historiques</h3>
+            <ul>
+                <li>Mausolée Seydina Issa Laye</li>
+                <li>Le puits de Seydina Limamou (Ténou Baay Seydi)</li>
+                <li>Place de l'Exil</li>
+                <li>Le cimetière</li>                
+            </ul>
+            <h3>Les Événements Historiques</h3>
+            <ul>
+                <li><h4>La commémoration de l'appel</h4>
+                    <p>La commémoration de l'appel qui est un évènement phare de la communauté. Lors de la célébration qui se tient le 8ème mois du calendrier musulman, Yoff et cambérène reçoivent des milliers de disciples tout de blanc vêtu et entonnant des chansons sur des rythmes dont eux seuls ont le secret. Mais c'est à cambérène que s'ouvre ses festivités. C'est en 1981 que le 3ème khalifa des layènes Baye Seydi a décidé de commémorer l'appel de son grand père Seydina Limamou dit Al Makhdi. L'analyse de cet événement permet de déceler les stratégies des autorités locales et nationales dans la régulation et la gouvernance. Il permet aux acteurs religieux de consolider leur capitale symbolique. C'est l'occasion de cet événement que les autorités locales sollicitent le concours de l'Etat pour les actions dans la localité religieuse.</p>
+                </li>
+            </ul>
+            <h3>Figures historiques</h3>
+            <ul>
+                <li><h4>Seydina Limamou Laye</h4>
+                    <p>Seydina Limamou Laye, plus connu sous le nom de IMAM AL MAHDI (réincarnation du prophète MOHAMET PSL), né en 1843 et décède en 1909. Il est le guide de la confrérie AHLOU LAHI (layène) dont il est le père fondateur. En 1883 Mame Baye Laye fait son appel d ou de nombreux fidèles y répondaient. Après l’appel il se fait menacer par les colons qui l exilaient en Gorée pendant 3 mois, jugé puis libéré. A son retour Seydina Limamou Laye s’installe à Ndingala avec ses disciples d ou plus tard il l’appela Kem Medina.</p>
+                </li>
+                <li><h4>Seydina Issa Laye</h4>
+                    <p>Seydina Issa Laye, fils et premier khalife d son père. En 1914, il transfert le village Kem Medina sur la cote suite à l’épidémie de la peste puis le donna le nom de Cambérène. Durant cette même année il créa le cimetière et divise le village en ‘’HEUTES’’. 1937 la construction de la Grande Mosquée de Cambérène, création du premier Dispensaire ,1939 construction de la première École, 1937-1949 instauration de la première Ecole située sur la cote.1949 la disparition de Seydina Issa Laye et durant ce même année la construction de L’Ecole Seydina Issa Laye.</p>
+                </li>
+                <li><h4>Seydina Mandione Laye</h4>
+                    <p>1949-1971 c’est le règne de Seydina Mandione Laye deuxième khalife de la confrérie Layenne.1960 la création du quartier Medina.1947-1971 instauration de la Route goudronnée qui avait commencé depuis le règne de Seydina Issa Laye .1971 instauration de l’Electricité et de l’Eau.</p>
+                </li>
+                <li><h4>Baye Seydi Thiaw Laye</h4>
+                    <p>1971-1987 c’est le règne de Baye Seydi Thiaw troisième khalife, durant son règne pas mal d’évènements se sont succedés.1982, le renouvellement de la Mosquée de Camberene, 1986, création des quartiers Mbane et Kawsara. 1986-1987 installation des égouts (canaux d’évacuation des eaux).</p>
+                </li>
+                <li><h4>Mame Alassane Thiaw Laye</h4>
+                    <p>1987-2001 règne de Mame Alassane Thiaw quatrième khalife pendant son règne on assiste à la construction de la maternité en 1992 ,1995-1996 création du quartier Deggo et en 1996 Cambérène a été érigée en commune d’arrondissement.</p>
+                </li>
+				<li><h4>Seydina Abdoulaye Thiaw Laye</h4>
+                    <p>2001-2021 la règne de Seydina Abdoulaye Thiaw Laye qui était le 5 ème khalife suite à la disparition de Seydina Mame Alassane Thiaw Laye en 2001. Baye Abdoulahi comme l’appelaient certains a été le porte-parole des différents grands khalifes qui se sont succédé à la tête de la communauté layène depuis le rappel à Dieu de Seydina Issa Rouhou Lahi.</p>
+                </li>
+				<li><h4>Mouhamadou Makhtar Laye</h4>
+                    <p>2021 à nos jours règne de Mouhamadou Makhtar Laye actuel khalife.</p>
+                </li>
+            </ul>
+        </div>
+        <div id="gallery">
+            <h3>Galerie</h3>
+            <div class="gallery-row">
+                <a href="imageC0.jpg" data-lightbox="gallery" data-title="Cambéréne">
+                    <img src="imageC0.jpg" alt="Cambéréne" class="gallery-image">
+                </a>
+                <a href="imageC2.jpg" data-lightbox="gallery" data-title="Cambéréne">
+                    <img src="imageC2.jpg" alt="Cambéréne" class="gallery-image">
+                </a>
+                <a href="imageC3.jpg" data-lightbox="gallery" data-title="Cambéréne">
+                    <img src="imageC3.jpg" alt="Cambéréne" class="gallery-image">
+                </a>
+				<a href="imageC4.jpg" data-lightbox="gallery" data-title="Cambéréne">
+                    <img src="imageC4.jpg" alt="Cambéréne" class="gallery-image">
+                </a>
+                <!-- Ajoutez d'autres images de la galerie ici -->
+            </div>
+        </div>
+        <div id="comments">
+            <h3>Commentaires</h3>
+            <textarea rows="5" placeholder="Laissez un commentaire..."></textarea>
+            <button>Soumettre</button>
+            <!-- Liste des commentaires -->
+            <div>
+                <p><strong>Assane Ndiaye:</strong> Très bel endroit!</p>
+                <p><strong>Momadou Diop:</strong> J'adore l'histoire de cette commune.</p>
+                <!-- Ajoutez d'autres commentaires ici -->
+            </div>
+            <a href="index.html">Retour à la carte</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        var googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
+        // Initialisation de la carte
+        var map = L.map('map').setView([14.768767, -17.420996], 16); // Coordonnées centrales de Cambéréne
+
+        // Couches de base
+        var googleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=' + googleMapsApiKey, {
+            attribution: 'Map data ©2021 Google',
+            maxZoom: 20
+        });
+
+        var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        });
+
+        // Ajout de la couche OpenStreetMap par défaut
+        openStreetMap.addTo(map);
+
+        // Liste des lieux
+        var locations = [
+            {
+                "name": "Keur Gou Makk",
+                "lat": 14.769928,
+                "lon": -17.429793,
+                "description": "Description",
+                "image": "imageC1.jpg"
+            },
+            {
+                "name": "Mosquée",
+                "lat": 14.770047,
+                "lon": -17.429117,
+                "description": "Description",
+                "image": "imageC2.jpg"
+            },
+            {
+                "name": "La Mausolée",
+                "lat": 14.771253,
+                "lon": -17.426196,
+                "description": "Description",
+                "image": "imageC3.jpg"
+            },
+            {
+                "name": "Maison de la femme",
+                "lat": 14.6818648,
+                "lon": -17.4583453,
+                "description": "Description",
+                "image": "imageC4.jpg"
+            },
+            {
+                "name": "Ecole Seydina Issa Laye",
+                "lat": 14.766827,
+                "lon": -17.430364,
+                "description": "Description",
+                "image": "imageC4.jpg"
+            },
+            {
+                "name": "Cimetière",
+                "lat": 14.770266,
+                "lon":-17.425978,
+                "description": "Description",
+                "image": "imageC4.jpg"
+            }
+        ];
+
+        // Ajout des marqueurs à la carte
+        var markersLayer = new L.LayerGroup(); // Layer to contain search results
+        map.addLayer(markersLayer);
+
+        locations.forEach(function(location) {
+            var marker = L.marker([location.lat, location.lon])
+                .bindPopup('<b>' + location.name + '</b><br>' + location.description + '<br><img src="' + location.image + '" alt="' + location.name + '" style="width:100%;">');
+            markersLayer.addLayer(marker);
+        });
+
+        // Ajout de la barre de recherche
+        var controlSearch = new L.Control.Search({
+            layer: markersLayer,
+            initial: false,
+            zoom: 17,
+            marker: false
+        });
+
+        map.addControl(controlSearch);
+
+        controlSearch.on('search:locationfound', function(e) {
+            e.layer.openPopup();
+        });
+
+        // Ajout du contrôle de calques pour basculer entre les cartes
+        var baseMaps = {
+            "Google Satellite Hybrid": googleSatelliteHybrid,
+            "OpenStreetMap": openStreetMap
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+    </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dakar Plateau - Informations Historiques</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        #map-container {
+            width: 60%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #content {
+            width: 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        #info, #gallery, #comments {
+            margin-bottom: 20px;
+        }
+        .gallery-row {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .gallery-image {
+            width: auto;
+            height: 150px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        h2, h3 {
+            margin-top: 0;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
+    <div id="content">
+        <div id="info">
+            <h2>Informations Historiques</h2>           
+            <p>La commune Le quartier de Dakar Plateau est l’une des dix-neuf communes d’arrondissement de la ville Dakar. Limite au nord par l’aventure Malick Sy de la cote de lance des madeleines au passage surnos, puis jusqu’au débouché du canal d’évacuation d’eau user dans le port. Au sud par la pointe du Cap manuel, à l’est par la rade de Dakar et l’ange Bernard et à l’ouest par l’ange des madeleines. Lors des derniers recensements, Dakar Plateau compté 34.713 habts couvrant une superficie de 5 km².</p>
+            <h3>Monuments et places historiques</h3>
+            <ul>
+                <li>La Cathédrale du Souvenir Africain</li>
+                <li>Le Palais Présidentiel</li>
+                <li>Le Musée Théodore Monod d'Art Africain </li>
+                <li>La Chambre de Commerce</li>
+                <li>La Grande Mosquée de Dakar</li>
+                <li>La place du tirailleur sénégalais</li>
+                <li>Place de l'Indépendance</li>
+                <li>Place du Souvenir Africain</li>
+                <li>Place de la Gare</li>
+                <li>Musée des civilisation noires</li>
+                <li>Le Fromager (Dengni thi Mboth)</li>                
+            </ul>
+            <h3>Figures historiques</h3>
+            <ul>
+                <li><h4>Dial Diop</h4>
+                    <p>Dial Diop est issus d’une ligné de la dynastie Wolof noble du Cayor les Diop
+(Ndiobéne). Ce sont eux qui ont pris le commandement de l’Etat lébou au XIX siècle.
+La fonction de Sérigne Ndakarou a été créée en 1790 du fait d’un fort besoin d’unité
+ressenti au sein de la communauté lébou, ce besoin est lui-même né des mutations
+de la société notamment celle entrainant par la progression de l’islam. A l’origine
+purement religieuse la fonction de Sérigne Dakar consistait à rendre la justice selon
+la loi islamique. A travers la tradition orale rapportée par Diossy et Cheikh Abdoulaye
+Sy, Dial Diop fut un musulman de mère lébou, son père Amadou Diop connu sous le
+nom de Goudi Diop était un notable et marabout Wolof originaire de Coki (Cayor). Ce
+même Dial Diop fut nommé le premier Grand Sérigne de Dakar,ce qui fait
+qu’aujourd’hui pour être le Grand Sérigne de Dakar il faut faire partiede la ligné de Dial
+Diop (Diossy et Cheikh Abdoulaye Sy figure 12).</p>
+                </li>
+				<li><h4>Auguste Léopold Protet</h4>
+                    <p>Protet fut gouverneur du Sénégal en 1850 et nommé capitaine de vaisseau en 1852,
+Pour des raisons de santé il est remplacé par Louis Faidherbe en 1854. Cependant,
+Protet revient en 1856 et commande la division des cotes occidentale d’Afrique
+mettant sa marque sur lafrégate de 42 canons. Il prend possession du territoire de
+Dakar au nom de la France en Mai 1857. Il rentre en France en 1859. Entendant la
+demande des notables de Gorée, la France décide de prendre procession de Dakar et
+la péninsule du Cap-Vert et crée un établissement Française. Le 25 Mai 1857, près du
+modeste village pêcheur de Dakar c’est ainsi que certains le considère comme le
+fondateur de la ville de Dakar. Depuis le Jeanne D’Arc dans la rade de Gorée, il écrit
+au Ministre pour lui informer de ca prise de procession. J’ai profité pour faire acte de
+prime de procession du jour de Ramadan qui est pour les populations indigènes de la
+presqu’île la plus grande fête de l’année. Le nom de Protet est donné à la place
+centrale de Dakar, rebaptisée en 1960 place de l’indépendance. Rappelons les colons
+se sont d’abord installés à Gorée et ne voulait pas cohabiter avec la population
+indigène. Les autorités coloniales craignaient de s’installer sur la terre Sénégalaise
+qui était une terre de fièvre et de barbarie. La démographie galopante sur la petite ile
+de Gorée qui devenait de plus en plus étroite a poussé le capitaine de vaisseau Protet
+a fondé la ville en 1857. La création de Dakar Plateau était spontanée sur un site
+particulier, un peuple nomade décide de se fixer le lieu étant propice au
+développement d’activités lucratives dans un l’environnement apte à nourrir les gens
+en permanence. La gestion foncière a toujours été un épineux problème pour le
+développement de la région de Dakar. Le non reconnaissance formelle des droits
+coutumiers lébou par le colonisateur amène les occupants à mettre en place un
+circuit de gestion parallèle qui a participé au développement. Les gouverneurs ont
+toujours admis d’une façon plus ou moins tacite cette prétention et quand le
+gouverneur Protet a voulu étendre la ville de Dakar dans la partie qui porte aujourd’hui
+son nom il paye la collectivité le territoire nécessaire a raison de 0F, 25 le mètre.</p>
+                </li>
+            </ul>
+            <h3>Les Événements Historiques</h3>
+            <ul>
+                <li><h4>L’aumône de Dakar</h4>
+                    <p>Bien avant l’arrive des européens, vers 1535, les lébous ont mis en place une
+collectivité qui les regroupes et à comme noyau pinth Mboth ou se loge la famille
+Paye. Mais avec l’avènement du soit disant peste comme le dit Sélé Paye, les six
+pinths vont se délocaliser pour aller s’installés à la Medina en gardant toujours les
+mêmes réalités et dépend du noyau. A cela s’ajoute, la collectivité lébou dont il est
+l’un des chefs de pinth organise tous les ans une aumône appelé «saraxu Ndakaaru».
+L’aumône se fait comme suite, il est organisé un jour de dimanche et lundi. En effet,
+le dimanche tous les douze pinths se regroupent au siège de la collectivité lébous
+«Sinthiaba» situé à la Médina dans le pinth de «NDEYE DJIREW». Au moment où les
+femmes préparent le couscous, les Hommes organisent la cérémonie du récital de
+coran. Par ailleurs, le lundi après avoir acheté trois boeufs de préférence un rouge et
+deux blanches dont le rouge est égorgé à Magiclande ou se trouve le génie
+protecteur de Dakar «leuk Daour Mbaye». Les deux autres sont égorgés «Teenu bay
+sogui» (à côté de cap Manuel) et à la Beigne de Hann. Cet événement qui se passe
+avant l’hivernage dans le but de protéger les populations Dakaroise (Sélé Paye).</p>
+                </li>
+                <li><h4>La construction du Port de Dakar</h4>
+                    <p>L’histoire du port de Dakar est très liée à celle de l’ile de Gorée qui était utilisée par
+les navigants déjà en 1354. Une activité commerciale très dense y régnait jusqu’en
+1857 année à laquelle on songea à installer une escale maritime à Dakar sur la
+grande terre. Une convention fut signée entre le Gouverneur Français et la compagnie
+des messageries impériales. Avec sa position géographique exceptionnelle de ce fait,
+celle-ci permet aux navires venant du Nordde disposer d’un gain de navigation de
+deux à trois jours par rapport aux autres ports de la côte Ouest africaine.
+Parfaitement balisé, le port autonome de Dakar est l’un des rares ports ou les navires
+de toutes catégories peuvent accéder à tout moment grâceaux conditions
+exceptionnelles du site. Mais aussi avec le plan Sénégal Emergent qui est le
+référentiel de la politique, économiques et sociale, le port autonome de Dakar a
+décidé de jouer un rôle de citoyen en participant à la réalisation de l’axe deux avec la
+création de sa fondation en 2018 pour mieux prendre en charge aux cotes des
+pouvoirs publics, les préoccupations des populations Sénégalaise vulnérables. C’est
+dans ce sens, qu’une organisation bien structurée facilitant l’exécution des
+exigencesapplicable a été mise en place. Il en est de même de la stratégie
+permettant de définir la feuille de la route à adopter pour contribuer à l’atteinte des
+objectifs du développement durable communément appelé (O.D.D). Ainsi la mission
+du port est de soutenir tout le Projet visant la valorisation des efforts de
+développement humaine en particulier dans le domaine de l’éducation, de la santé, de
+l’environnement etc. De plus, le port à effectuer des progrès rapide en rapport avec
+l’importance de ses diverses fonctions comme Port régional. Ainsi, en 1911 le port
+enregistre plus de quatre millions de tonneaux de jauge, on passe à 5,6 millions en
+1913. Ainsi ces progrès, constatés depuis soixante-dix ans ont récemment augmenté
+leur cadence. En fin, en parlant de son développement qui est notamment en raison
+des crédits assurés par les emprunts de 1903, les travaux d’aménagement de ce port
+ont fait objet de développement progressif au fur du temps (Daniel Castillo Hidalgo
+1880-1939, Jacques Charpy 2011).</p>
+                </li>               
+            </ul>
+        </div>
+        <div id="gallery">
+            <h3>Galerie</h3>
+            <div class="gallery-row">
+                <a href="DP1.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="DP1.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <a href="DP2.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="DP2.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <a href="DP3.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="DP3.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+				<a href="DP4.jpg" data-lightbox="gallery" data-title="Galerie Gueule Tapée">
+                    <img src="DP4.jpg" alt="Galerie Gueule Tapée" class="gallery-image">
+                </a>
+                <!-- Ajoutez d'autres images de la galerie ici -->
+            </div>
+        </div>
+        <div id="comments">
+            <h3>Commentaires</h3>
+            <textarea rows="5" placeholder="Laissez un commentaire..."></textarea>
+            <button>Soumettre</button>
+            <!-- Liste des commentaires -->
+            <div>
+                <p><strong>Assane Ndiaye:</strong> Très bel endroit!</p>
+                <p><strong>Momadou Diop:</strong> J'adore l'histoire de cette commune.</p>
+                <!-- Ajoutez d'autres commentaires ici -->
+            </div>
+            <a href="index.html">Retour à la carte</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-search/3.0.1/leaflet-search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        var googleMapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+
+        // Initialisation de la carte
+        var map = L.map('map').setView([ 14.670848,-17.446485], 14); // Coordonnées centrales de Gueule Tapée-Fass-Colobane
+
+        // Couches de base
+        var googleSatelliteHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=' + googleMapsApiKey, {
+            attribution: 'Map data ©2021 Google',
+            maxZoom: 20
+        });
+
+        var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        });
+
+        // Ajout de la couche OpenStreetMap par défaut
+        openStreetMap.addTo(map);
+
+        // Liste des lieux
+        var locations = [
+            {
+                "name": "La Cathédrale du Souvenir Africain",
+                "lat": 14.665470,
+                "lon": -17.437557,
+                "description": "Cette cathédrale est un mélange d'architecture gothique et traditionnelle africaine, symbole de l'histoire religieuse du pays.",
+                "image": "DP1.jpg"
+            },
+            {
+                "name": "Le Palais Présidentiel",
+                "lat": 14.664355,
+                "lon": -17.432821,
+                "description": "Résidence officielle du président du Sénégal, il est un exemple d'architecture coloniale.",
+                "image": "DP2.jpg"
+            },
+            {
+                "name": "Le Musée Théodore Monod d'Art Africain",
+                "lat": 14.663537,
+                "lon": -17.438147,
+                "description": "Ce musée renferme une riche collection d'art africain traditionnel.",
+                "image": "DP3.jpg"
+            },
+            {
+                "name": "La Chambre de Commerce",
+                "lat": 14.670354,
+                "lon": -17.432651,
+                "description": "Un bâtiment colonial abritant aujourd'hui des activités commerciales et administratives.",
+                "image": "DP4.jpg"
+            },
+            {
+                "name": "La Grande Mosquée de Dakar",
+                "lat": 14.678013,
+                "lon": -17.442942,
+                "description": "Un édifice religieux de grande importance pour la communauté musulmane.",
+                "image": "DP5.jpg"
+            },
+            {
+                "name": "La place du tirailleur sénégalais",
+                "lat": 14.674950,
+                "lon": -17.432986,
+                "description": "le monument a été réalisée par le sculpteur français Paul Ducuing pour rappeler les moments tragiques et douloureux de la Grande Guerre. Inauguré le 30 décembre 1923 au rond-point de l’Étoile à Dakar, le monument à la gloire des troupes noires et aux disparus de l’Afrique occidentale française représente un tirailleur sénégalais et un poilu français. Cependant, lors de la célébration de la Journée du rirailleur, lancée le 23 août 2004, Abdoulaye Wade, président de la République du Sénégal, fait réinstaller la statue au centre de Dakar, place de la Gare Dakar-Niger, rebaptisée à cette occasion Place du Tirailleur.",
+                "image": "DP6.jpg"
+            },
+            {
+                "name": "Place de l'Indépendance",
+                "lat": 14.669712,
+                "lon": -17.432012,
+                "description": "Au centre de Dakar, cet espace historique est dominé par l'Obélisque de Dakar, un symbole de l'indépendance du Sénégal",
+                "image": "DP7.jpg"
+            },
+            {
+                "name": "Place du Souvenir Africain",
+                "lat":  14.692130,
+                "lon": -17.475514,
+                "description": "Un lieu qui rend hommage à l'héritage africain, marqué par la Cathédrale du Souvenir Africain et d'autres structures historiques.",
+                "image": "DP8.jpg"
+            },
+            {
+                "name": "Place de la Gare",
+                "lat":14.675663,
+                "lon": -17.433398,
+                "description": "Anciennement le point central du réseau ferroviaire sénégalais, elle conserve des éléments historiques de cette époque.",
+                "image": "DP9.jpg"
+            },
+            {
+                "name": "Musée des civilisation noires",
+                "lat": 14.677290,
+                "lon": -17.435133,
+                "description": "Le Musée des Civilisations Noires a été inauguré le 6 décembre 2018 à Dakar, Sénégal. Il a été créé dans le but de célébrer et de promouvoir la diversité culturelle et l'héritage des civilisations africaines. Ce musée est spécifique car il est le premier du genre à se concentrer spécifiquement sur les civilisations africaines et à mettre en valeur leur histoire, leur art et leur contribution à l'humanité.",
+                "image": "DP10.jpg"
+            }            
+        ];
+
+        // Ajout des marqueurs à la carte
+        var markersLayer = new L.LayerGroup(); // Layer to contain search results
+        map.addLayer(markersLayer);
+
+        locations.forEach(function(location) {
+            var marker = L.marker([location.lat, location.lon])
+                .bindPopup('<b>' + location.name + '</b><br>' + location.description + '<br><img src="' + location.image + '" alt="' + location.name + '" style="width:100%;">');
+            markersLayer.addLayer(marker);
+        });
+
+        // Ajout de la barre de recherche
+        var controlSearch = new L.Control.Search({
+            layer: markersLayer,
+            initial: false,
+            zoom: 17,
+            marker: false
+        });
+
+        map.addControl(controlSearch);
+
+        controlSearch.on('search:locationfound', function(e) {
+            e.layer.openPopup();
+        });
+
+        // Ajout du contrôle de calques pour basculer entre les cartes
+        var baseMaps = {
+            "Google Satellite Hybrid": googleSatelliteHybrid,
+            "OpenStreetMap": openStreetMap
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+    </script>
+</body>
+</html>
